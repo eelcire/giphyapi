@@ -14,17 +14,19 @@ function Searchbar(props) {
 
   return (
     <form
+      className="search-form"
       onSubmit={(e) => {
         props.onSearchGiphy(e, input);
         clearInput();
       }}
     >
       <input
+        className="input"
         placeholder="Find your Giphy!"
         onChange={(e) => onChangeInput(e.target.value)}
         value={input}
       ></input>
-      <button>Search!</button>
+      <button className="search-button">Search!</button>
     </form>
   );
 }

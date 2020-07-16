@@ -1,22 +1,50 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
 
+import { setCurrentGiphys } from "../../../actions";
 import { connect } from "react-redux";
 
 import GiphyComponent from "../../GiphyComponent";
+import PagesButton from "../../PagesButton";
 
 function ContentContainer(props) {
-  const [page, setPage] = useState(1);
+  const onPageClick = (e, page) => {
+    e.preventDefault();
+    props.setCurrentGiphys(page);
+    window.scroll(0, 0);
+  };
 
-  const renderGiphys = props.giphys
-    ? props.giphys.map((giphy, i) => <GiphyComponent key={i} giphy={giphy} />)
+  const renderGiphys = props.currentGiphys.map((giphy, i) => (
+    <GiphyComponent key={i} giphy={giphy} />
+  ));
+
+  const pagesArray = [0, 29, 59, 89, 119, 149, 179, 209, 239, 269];
+
+  const renderPages = props.giphys
+    ? props.giphys.map((giphy, i) =>
+        pagesArray.includes(i) ? (
+          <PagesButton
+            onPageClick={onPageClick}
+            key={i}
+            currentPage={props.page}
+            page={Math.ceil((i + 2) / 30)}
+          />
+        ) : null
+      )
     : null;
 
-  return <div className="container">{renderGiphys}</div>;
+  return (
+    <div className="main-container">
+      <div className="giphy-container">{renderGiphys}</div>
+      <div className="button-container">{renderPages}</div>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => ({
   giphys: state.giphys,
+  currentGiphys: state.currentGiphys,
+  page: state.page,
 });
 
-export default connect(mapStateToProps)(ContentContainer);
+export default connect(mapStateToProps, { setCurrentGiphys })(ContentContainer);

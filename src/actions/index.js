@@ -6,10 +6,22 @@ export const receiveGiphyData = (data) => ({
   data,
 });
 
+export const setCurrentGiphys = (page) => ({
+  type: "SET_CURRENT_GIPHYS",
+  page,
+});
+
+export const addToFavorites = (data) => ({
+  type: "ADD_TO_FAVORITES",
+  data,
+});
+
 export const searchGiphy = (input) => {
   return (dispatch) => {
     return axios
       .get(`${BASE_URL}q=${input}&limit=${LIMIT}&api_key=${PUBLIC_KEY}`)
-      .then(({ data }) => dispatch(receiveGiphyData(data)));
+      .then(({ data }) => {
+        dispatch(receiveGiphyData(data));
+      });
   };
 };
