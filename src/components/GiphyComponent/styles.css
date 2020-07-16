@@ -17,10 +17,20 @@
   border: 1px groove rgb(227, 227, 227);
   margin: 10px;
   background-color: rgb(160, 160, 160);
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
 }
 
 .card-title {
   margin: 5px 0 30px 0;
   font-size: 15px;
   font-weight: bold;
+}
+
+.favorite {
+  background-color: red;
+  color: red;
 }

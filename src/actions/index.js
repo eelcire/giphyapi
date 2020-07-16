@@ -16,6 +16,16 @@ export const addToFavorites = (data) => ({
   data,
 });
 
+export const removeFromFavorites = (data) => ({
+  type: "REMOVE_FROM_FAVORITES",
+  data,
+});
+
+export const setFavorites = (data) => ({
+  type: "SET_FAVORITES",
+  data,
+});
+
 export const searchGiphy = (input) => {
   return (dispatch) => {
     return axios

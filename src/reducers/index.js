@@ -24,10 +24,32 @@ const reducer = (state = defaultState, action) => {
         ),
         page: action.page,
       };
-    case "ADD_TO_FAVORITES":
+    case "SET_FAVORITES":
       return {
-        gipys: state.giphys,
+        giphys: state.giphys,
+        favorite: action.data,
+        currentGiphys: state.currentGiphys,
+        page: state.page,
+      };
+    case "ADD_TO_FAVORITES":
+      localStorage.setItem(
+        "favoriteGiphysArray",
+        JSON.stringify([...state.favorite, action.data])
+      );
+      return {
+        giphys: state.giphys,
         favorite: [...state.favorite, action.data],
+        currentGiphys: state.currentGiphys,
+        page: state.page,
+      };
+    case "REMOVE_FROM_FAVORITES":
+      const newFavorites = state.favorite.filter(
+        (item) => item.id !== action.data.id
+      );
+      localStorage.setItem("favoriteGiphysArray", JSON.stringify(newFavorites));
+      return {
+        giphys: state.giphys,
+        favorite: newFavorites,
         currentGiphys: state.currentGiphys,
         page: state.page,
       };
