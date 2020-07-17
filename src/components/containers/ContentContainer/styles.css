@@ -9,7 +9,14 @@
   height: auto;
   width: 95%;
   background-color: rgb(62, 62, 62);
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-flow: row wrap;
+  flex: 0 0 33.3333333%;
   padding-top: 30px;
+  justify-content: center;
+}
+
+.display-message {
+  color: rgb(210, 210, 210);
+  margin: auto;
 }

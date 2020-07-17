@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import Header from "./components/Header";
 import Homepage from "./views/Homepage";
 import Favorites from "./views/Favorites";
 
@@ -18,7 +17,6 @@ class App extends Component {
       this.props.setFavorites(
         JSON.parse(localStorage.getItem("favoriteGiphysArray"))
       );
-      console.log(this.props.favoriteGiphys);
     } else {
       localStorage.setItem("favoriteGiphysArray", JSON.stringify([]));
     }
@@ -28,7 +26,6 @@ class App extends Component {
     return (
       <div id="body">
         <Router>
-          <Header />
           <Switch>
             <Route exact path="/">
               <Homepage />

@@ -4,11 +4,16 @@ import "./styles.css";
 import { addToFavorites, removeFromFavorites } from "../../actions";
 import { connect } from "react-redux";
 
+import star from "./star.png";
+import yellowStar from "./yellow-star.png";
+import deleteButton from "./delete.png";
+
 function GiphyComponent({
   giphy,
   favoriteGiphys,
   addToFavorites,
   removeFromFavorites,
+  favorite,
 }) {
   const onImageClick = () => {
     if (favoriteGiphys.length > 0) {
@@ -19,13 +24,17 @@ function GiphyComponent({
         }
       }
       if (present) {
-        removeFromFavorites(giphy);
+        return;
       } else {
         addToFavorites(giphy);
       }
     } else {
       addToFavorites(giphy);
     }
+  };
+
+  const onDeleteClick = () => {
+    removeFromFavorites(giphy);
   };
 
   const checkForFavorites = () => {
@@ -37,8 +46,18 @@ function GiphyComponent({
       }
     }
   };
+
+  const renderBin = favorite ? (
+    <img
+      onClick={onDeleteClick}
+      className="delete"
+      src={deleteButton}
+      alt="delete"
+    ></img>
+  ) : null;
+
   return (
-    <div className={`card ${checkForFavorites()}`}>
+    <div className={`card`}>
       <img
         onClick={onImageClick}
         className="giphy-image"
@@ -46,6 +65,14 @@ function GiphyComponent({
         alt={giphy.title}
       ></img>
       <div className="card-title">{giphy.title}</div>
+      <div className="icon-container">
+        <img
+          className="star"
+          src={checkForFavorites() === "favorite" ? yellowStar : star}
+          alt="star"
+        ></img>
+        {renderBin}
+      </div>
     </div>
   );
 }

@@ -14,13 +14,35 @@ function ContentContainer(props) {
     window.scroll(0, 0);
   };
 
-  const renderGiphys = props.currentGiphys.map((giphy, i) => (
-    <GiphyComponent key={i} giphy={giphy} />
-  ));
+  const renderGiphys =
+    props.renderItems.length === 0 ? (
+      <p className="display-message">{props.noDisplayMessage}</p>
+    ) : props.favorite ? (
+      props.renderItems.map((giphy, i) => (
+        <GiphyComponent key={i} giphy={giphy} favorite={true} />
+      ))
+    ) : (
+      props.renderItems.map((giphy, i) => (
+        <GiphyComponent key={i} giphy={giphy} />
+      ))
+    );
 
   const pagesArray = [0, 29, 59, 89, 119, 149, 179, 209, 239, 269];
 
-  const renderPages = props.giphys
+  const renderPages = props.favorite
+    ? props.renderItems
+      ? props.renderItems.map((giphy, i) =>
+          pagesArray.includes(i) ? (
+            <PagesButton
+              onPageClick={onPageClick}
+              key={i}
+              currentPage={props.page}
+              page={Math.ceil((i + 2) / 30)}
+            />
+          ) : null
+        )
+      : null
+    : props.giphys
     ? props.giphys.map((giphy, i) =>
         pagesArray.includes(i) ? (
           <PagesButton

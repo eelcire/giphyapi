@@ -29,9 +29,10 @@ export const setFavorites = (data) => ({
 export const searchGiphy = (input) => {
   return (dispatch) => {
     return axios
-      .get(`${BASE_URL}q=${input}&limit=${LIMIT}&api_key=${PUBLIC_KEY}`)
+      .get(`${BASE_URL}api_key=${PUBLIC_KEY}&q=${input}&limit=${LIMIT}`)
       .then(({ data }) => {
         dispatch(receiveGiphyData(data));
-      });
+      })
+      .catch((err) => console.error(err));
   };
 };

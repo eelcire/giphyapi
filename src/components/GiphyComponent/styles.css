@@ -12,6 +12,7 @@
 
 .card {
   display: flex;
+  flex-basis: 30%;
   flex-direction: column;
   align-items: center;
   border: 1px groove rgb(227, 227, 227);
@@ -25,12 +26,31 @@
 }
 
 .card-title {
-  margin: 5px 0 30px 0;
+  margin-top: 10px;
   font-size: 15px;
   font-weight: bold;
+  height: 20px;
 }
 
-.favorite {
-  background-color: red;
-  color: red;
+.icon-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.star {
+  height: 35px;
+}
+
+.delete {
+  height: 35px;
+  position: absolute;
+  right: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.delete:hover {
+  transform: scale(1.5);
 }
